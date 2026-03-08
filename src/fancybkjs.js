@@ -23,7 +23,7 @@ class FancyBook {
     };
 
 
-    import({ } = subjectsA, { } = subjectsD) {
+    import(subjectsA, subjectsD) {
         this.RAM.subjectsA = subjectsA;
         this.RAM.subjectsD = subjectsD;
     };
