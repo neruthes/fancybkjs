@@ -1,0 +1,138 @@
+<html>
+<head>
+    <title>Example: SomeCorp1</title>
+    <style>
+        html, body {
+            font-size: 14px;
+        }
+        h1 { padding: 60px 0 30px; }
+        h2 { border-bottom: 1px solid #999; padding: 10px 0 10px; margin: 40px 0 20px; }
+        table th {
+            text-align: left;
+        }
+        table.table-loglines { width: 100%; overflow: scroll; }
+        th, td { padding: 3px 11px; }
+        th.th-subj1, th.th-subj2 { width: 10.5rem; }
+        th.th-amount1, th.th-amount2 { width: auto; text-align: right; }
+        table, tr {
+            border: 1px solid #999;
+            border-collapse: collapse;
+        }
+        .tabular-nums, td { font-variant-numeric: tabular-nums; }
+        td.col-comment { font-size: 0.8em; }
+        td.col-amount1, td.col-amount2 { text-align: right; }
+    </style>
+</head>
+<body>
+<table>
+            <thead>
+                <tr>
+                    <th class="th-date">Date</th>
+                    <th class="th-subj1">Subject 1</th>
+                    <th class="th-amount1">Amount 1</th>
+                    <th class="th-subj2">Subject 2</th>
+                    <th class="th-amount2">Amount 2</th>
+                    <th class="th-comment">Comment</th>
+                </tr>
+            </thead>
+        <tbody><tr>
+                    <td class="col-date">2015-02-01</td>
+                    <td class="col-subj1">BankDeposit/BOA</td>
+                    <td class="col-amount1">5000.00</td>
+                    <td class="col-subj2">Equity/Input/Alice</td>
+                    <td class="col-amount2">5000.00</td>
+                    <td class="col-comment">Initial shareholder investment</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-02-01</td>
+                    <td class="col-subj1">BankDeposit/WF</td>
+                    <td class="col-amount1">3000.00</td>
+                    <td class="col-subj2">Equity/Input/Bob</td>
+                    <td class="col-amount2">3000.00</td>
+                    <td class="col-comment">Initial shareholder investment</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-02-01</td>
+                    <td class="col-subj1">BankDeposit/WF</td>
+                    <td class="col-amount1">(7999.00)</td>
+                    <td class="col-subj2">Equity/Spent</td>
+                    <td class="col-amount2">(7999.00)</td>
+                    <td class="col-comment">Office rent lease</td>
+            </tr></tbody></table><h2>Balance Sheet Snapshot</h2><div>
+            <div style="width: 25em;">
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td><span ></span>BankDeposit</td>
+                <td>1.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>|&nbsp;&nbsp;&nbsp;BOA</td>
+                <td>5000.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>|&nbsp;&nbsp;&nbsp;WF</td>
+                <td>(4999.00)</td>
+            </tr>
+            
+        
+        
+                
+            </tbody>
+        </table></div>
+            <div style="width: 25em;">
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td><span ></span>Equity</td>
+                <td>1.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>|&nbsp;&nbsp;&nbsp;Input</td>
+                <td>8000.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Alice</td>
+                <td>5000.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Bob</td>
+                <td>3000.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>|&nbsp;&nbsp;&nbsp;Spent</td>
+                <td>(7999.00)</td>
+            </tr>
+            
+        
+        
+                
+            </tbody>
+        </table></div>
+        </div>
+</body>
+</html>
