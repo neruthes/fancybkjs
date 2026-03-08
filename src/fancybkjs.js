@@ -24,8 +24,13 @@ class FancyBook {
 
 
     import(subjectsA, subjectsD) {
-        this.RAM.subjectsA = subjectsA;
-        this.RAM.subjectsD = subjectsD;
+        const __process_dict = function (dict) {
+            const md2 = {};
+            Object.keys(dict).forEach(key => md2[key] = dict[key] * 1e3);
+            return md2;
+        }
+        this.RAM.subjectsA = __process_dict(subjectsA);
+        this.RAM.subjectsD = __process_dict(subjectsD);
     };
 
     date(input_date) {
@@ -42,6 +47,16 @@ class FancyBook {
         const dict = is_asset ? this.RAM.subjectsA : this.RAM.subjectsD;
         dict[name] += amount; // We internally store 1000 times of real value to avoid float precision problems
     };
+
+    static __super_sanitize_number(input_number) {
+        return parseFloat((input_number).toFixed(3))
+    }
+    __get_subj_val(name, is_asset) {
+        const dict = is_asset ? this.RAM.subjectsA : this.RAM.subjectsD;
+        return FancyBook.__super_sanitize_number(dict[name] / 1000);
+    };
+    getA(name) { return __get_subj_val(name, true) };
+    getD(name) { return __get_subj_val(name, false) };
 
     __write_transaction_output(input_date, subj1, subj2, amount, comment, amount2_polarity) {
         if (this.RAM.is_group_active) {
@@ -130,10 +145,10 @@ class FancyBook {
         return this.__write_transaction_output(this.RAM.last_date, subj1, subj2, amount * 1e3, comment, -1);
     };
     transferA(input_date, subj1, subj2, amount, comment) {
-        return __any_transfer(true, input_date, subj1, subj2, amount, comment);
+        return this.__any_transfer(true, input_date, subj1, subj2, amount, comment);
     };
     transferD(input_date, subj1, subj2, amount, comment) {
-        return __any_transfer(false, input_date, subj1, subj2, amount, comment);
+        return this.__any_transfer(false, input_date, subj1, subj2, amount, comment);
     };
 
 
@@ -196,8 +211,8 @@ class FancyBook {
             // style="padding-left: ${depth * 20}px"
             return nodes.map(node => `
             <tr>
-                <td><span ></span>${(new Array(depth).fill("|&nbsp;&nbsp;&nbsp;").join(''))}${node.name}</td>
-                <td>${this.__render_number(node.value)}</td>
+                <td><span ></span>${(new Array(depth).fill("└&nbsp;").join(''))}${node.name}</td>
+                <td style="text-align: right;">${this.__render_number(node.value)}</td>
             </tr>
             ${renderTreeRows(node.children, depth + 1)}
         `).join('');
@@ -210,17 +225,17 @@ class FancyBook {
                 .map(path => `
                 <tr>
                     <td>${path}</td>
-                    <td>${this.__render_number(input_dict[path] / 1e3)}</td>
+                    <td style="text-align: right;">${this.__render_number(input_dict[path] / 1.000)}</td>
                 </tr>
             `).join('');
         };
 
         return `
-        <table border="1" style="border-collapse: collapse; width: 100%;">
+        <table style="border-collapse: collapse; width: 100%;">
             <thead>
                 <tr>
                     <th>Subject</th>
-                    <th>Value</th>
+                    <th style="text-align: right;">Value</th>
                 </tr>
             </thead>
             <tbody>
@@ -235,8 +250,9 @@ class FancyBook {
         let s01 = this.__render_balance_sheet_table_from_dict(this.RAM.subjectsA);
         let s02 = this.__render_balance_sheet_table_from_dict(this.RAM.subjectsD);
         return `<div>
-            <div style="width: 25em;">${s01}</div>
-            <div style="width: 25em;">${s02}</div>
+            <div style="float: left; margin-right: 2em;">${s01}</div>
+            <div style="float: left;">${s02}</div>
+            <div style="clear: both"></div>
         </div>`;
     };
 }
