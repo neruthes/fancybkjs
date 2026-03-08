@@ -152,31 +152,9 @@ class FancyBook {
     };
 
 
-    // __render_balance_sheet_table_from_dict(input_dict) {
-    //     // NOTE: input_dict is like: {"Capital/Input/Alice": 20, "Capital/Input/Bob": 30, "Capital/Spent": -40, "OtherPayable": 10}
-    //     let raw_subjects_list = Object.keys(input_dict);
-    //     let subjects_tree = [ // Here is an example...
-    //         {
-    //             name: "Capital", value: 10, children: [
-    //                 { name: "Input", value: 50, children: [
-    //                     { name: "Alice", value: 20, children: [] },
-    //                     { name: "Alice", value: 30, children: [] },
-    //                 ] },
-    //                 { name: "Spent", value: 50, children: [] },
-    //             ]
-    //         }
-    //     ]
-    //     // TODO: Parse input_dict and generate subjects_tree (only subjects with names containing slash) and finally render a table to show nested subjects on the tree and the remaining simple subjects in `raw_subjects_list` as in the original order
-
-    //     return `<table>
-    //         <tbody>
-    //         // TODO...
-    //         </tbody>
-    //     </table>`;
-    // };
 
 
-    // START OF GEMINI CODE
+    // ----- BEGIN GEMINI CODE -----
     __render_balance_sheet_table_from_dict(input_dict) {
         const raw_subjects_list = Object.keys(input_dict);
         const subjects_tree = [];
@@ -211,7 +189,7 @@ class FancyBook {
             // style="padding-left: ${depth * 20}px"
             return nodes.map(node => `
             <tr>
-                <td><span ></span>${(new Array(depth).fill("└&nbsp;").join(''))}${node.name}</td>
+                <td><span ></span>${(new Array(depth).fill("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;").join(''))}${node.name}</td>
                 <td style="text-align: right;">${this.__render_number(node.value)}</td>
             </tr>
             ${renderTreeRows(node.children, depth + 1)}
@@ -244,7 +222,7 @@ class FancyBook {
             </tbody>
         </table>`;
     };
-    // END OF GEMINI CODE
+    // ----- END GEMINI CODE -----
 
     dump_balance_sheet() {
         let s01 = this.__render_balance_sheet_table_from_dict(this.RAM.subjectsA);
