@@ -49,14 +49,14 @@ class FancyBook {
     };
 
     static __super_sanitize_number(input_number) {
-        return parseFloat((input_number).toFixed(3))
-    }
+        return parseFloat(input_number.toFixed(3));
+    };
     __get_subj_val(name, is_asset) {
         const dict = is_asset ? this.RAM.subjectsA : this.RAM.subjectsD;
         return FancyBook.__super_sanitize_number(dict[name] / 1000);
     };
-    getA(name) { return __get_subj_val(name, true) };
-    getD(name) { return __get_subj_val(name, false) };
+    getA(name) { return this.__get_subj_val(name, true) };
+    getD(name) { return this.__get_subj_val(name, false) };
 
     __write_transaction_output(input_date, subj1, subj2, amount, comment, amount2_polarity) {
         if (this.RAM.is_group_active) {
@@ -91,7 +91,7 @@ class FancyBook {
     };
 
     __render_group_arr(arr) {
-        let output_string = `<table>
+        let output_string = `<table class="table-loglines">
             <thead>
                 <tr>
                     <th class="th-date">Date</th>
