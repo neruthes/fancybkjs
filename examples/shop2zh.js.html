@@ -1,0 +1,684 @@
+<html>
+<head>
+    <title>Example: Shop2</title>
+    <style>
+        <style>
+        html, body {
+            font-size: 10px;
+        }
+        h1 { padding: 60px 0 30px; }
+        h2 { border-bottom: 1px solid #999; padding: 10px 0 10px; margin: 40px 0 20px; }
+        table th {
+            text-align: left;
+        }
+        table.table-loglines { width: 100%; overflow: scroll; }
+        th, td { padding: 3px 11px; }
+        th.th-date { width: 7em; }
+        th.th-subj1, th.th-subj2 { width: 20rem; }
+        th.th-amount1, th.th-amount2 { width: 6em; text-align: right; }
+        table, tr {
+            border: 1px solid #999;
+            border-collapse: collapse;
+        }
+        .tabular-nums, td { font-variant-numeric: tabular-nums; }
+        td.col-comment { font-size: 0.8em; width: auto; }
+        td.col-amount1, td.col-amount2 { text-align: right; }
+    </style>
+    </style>
+</head>
+<body>
+<h1>Example: Shop2</h1><table class="table-loglines">
+            <thead>
+                <tr>
+                    <th class="th-date">Date</th>
+                    <th class="th-subj1">Subject 1</th>
+                    <th class="th-amount1">Amount 1</th>
+                    <th class="th-subj2">Subject 2</th>
+                    <th class="th-amount2">Amount 2</th>
+                    <th class="th-comment">Comment</th>
+                </tr>
+            </thead>
+        <tbody><tr>
+                    <td class="col-date">2015-02-18</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">150000.00</td>
+                    <td class="col-subj2">实收资本/缴纳总量/张三</td>
+                    <td class="col-amount2">150000.00</td>
+                    <td class="col-comment">扩表：股东出资</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-02-18</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">50000.00</td>
+                    <td class="col-subj2">实收资本/缴纳总量/李四</td>
+                    <td class="col-amount2">50000.00</td>
+                    <td class="col-comment">扩表：股东出资</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-02-18</td>
+                    <td class="col-subj1">@本期营业/支出/成本</td>
+                    <td class="col-amount1">4200.00</td>
+                    <td class="col-subj2">应付账款/房东A</td>
+                    <td class="col-amount2">(4200.00)</td>
+                    <td class="col-comment">产生店铺租金，2015-03</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-02-18</td>
+                    <td class="col-subj1">库存</td>
+                    <td class="col-amount1">830.00</td>
+                    <td class="col-subj2">应付账款/供应商B</td>
+                    <td class="col-amount2">830.00</td>
+                    <td class="col-comment">扩表：赊账进货</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-02-18</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">5800.00</td>
+                    <td class="col-subj2">@本期营业/收入/主营业务</td>
+                    <td class="col-amount2">5800.00</td>
+                    <td class="col-comment">扩表：销售商品所得</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-02-18</td>
+                    <td class="col-subj1">库存</td>
+                    <td class="col-amount1">(830.00)</td>
+                    <td class="col-subj2">@本期营业/支出/成本</td>
+                    <td class="col-amount2">(830.00)</td>
+                    <td class="col-comment">缩表：结转销售成本</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-02-18</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">(830.00)</td>
+                    <td class="col-subj2">应付账款/供应商B</td>
+                    <td class="col-amount2">(830.00)</td>
+                    <td class="col-comment">缩表：支付货款</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-03-09</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">(4200.00)</td>
+                    <td class="col-subj2">应付账款/房东A</td>
+                    <td class="col-amount2">(4200.00)</td>
+                    <td class="col-comment">缩表：实际支付租金</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-03-09</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">(225.00)</td>
+                    <td class="col-subj2">@本期营业/支出/管理费用</td>
+                    <td class="col-amount2">(225.00)</td>
+                    <td class="col-comment">缩表：支付清洁费</td>
+            </tr></tbody></table><pre style="padding: 1em; background: rgba(122, 122, 122, 0.06); border: 1px solid #666;">
+
+#block(breakable: true, {
+set text(size: 9.0pt, number-width: "tabular")
+let render_transaction(dat, subj1, am1, subj2, am2, comment) = box(inset: (bottom: -0.3mm),table(
+    inset: 0mm,
+    columns:(6em, 3fr, 2fr, 3fr, 2fr, 4fr), gutter: 2mm, align: (left, left, right, left, right, left), stroke: none,
+    dat, subj1, am1, subj2, am2, text(size:0.75em, comment),
+))
+  render_transaction("2015-02-18", "银行存款/招商01", "150000.00", "实收资本/缴纳总量/张三", "150000.00", "扩表：股东出资")
+  render_transaction("2015-02-18", "银行存款/招商01", "50000.00", "实收资本/缴纳总量/李四", "50000.00", "扩表：股东出资")
+  render_transaction("2015-02-18", "@本期营业/支出/成本", "4200.00", "应付账款/房东A", "(4200.00)", "产生店铺租金，2015-03")
+  render_transaction("2015-02-18", "库存", "830.00", "应付账款/供应商B", "830.00", "扩表：赊账进货")
+  render_transaction("2015-02-18", "银行存款/招商01", "5800.00", "@本期营业/收入/主营业务", "5800.00", "扩表：销售商品所得")
+  render_transaction("2015-02-18", "库存", "(830.00)", "@本期营业/支出/成本", "(830.00)", "缩表：结转销售成本")
+  render_transaction("2015-02-18", "银行存款/招商01", "(830.00)", "应付账款/供应商B", "(830.00)", "缩表：支付货款")
+  render_transaction("2015-03-09", "银行存款/招商01", "(4200.00)", "应付账款/房东A", "(4200.00)", "缩表：实际支付租金")
+  render_transaction("2015-03-09", "银行存款/招商01", "(225.00)", "@本期营业/支出/管理费用", "(225.00)", "缩表：支付清洁费")
+})
+</pre><h2>资产负债表快照</h2><div>
+                <div style="float: left; margin-right: 2em;">
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th style="text-align: right;">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td><span ></span>银行存款</td>
+                <td style="text-align: right;">200545.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;招商01</td>
+                <td style="text-align: right;">200545.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>现金</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收银柜台</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;董事备用金</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>应收账款</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+                
+                <tr>
+                    <td>库存</td>
+                    <td style="text-align: right;">0.00</td>
+                </tr>
+            
+            </tbody>
+        </table></div>
+                <div style="float: left;">
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th style="text-align: right;">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td><span ></span>实收资本</td>
+                <td style="text-align: right;">200000.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;缴纳总量</td>
+                <td style="text-align: right;">200000.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;张三</td>
+                <td style="text-align: right;">150000.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;李四</td>
+                <td style="text-align: right;">50000.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;消耗总量</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>应付账款</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;房东A</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供应商B</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>@本期营业</td>
+                <td style="text-align: right;">545.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收入</td>
+                <td style="text-align: right;">5800.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主营业务</td>
+                <td style="text-align: right;">5800.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支出</td>
+                <td style="text-align: right;">(5255.00)</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成本</td>
+                <td style="text-align: right;">(5030.00)</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理费用</td>
+                <td style="text-align: right;">(225.00)</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+        
+            <tr>
+                <td><span ></span>@结算用临时科目</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本期毛利</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本期所得税</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本期净利</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+                
+                <tr>
+                    <td>资本公积</td>
+                    <td style="text-align: right;">0.00</td>
+                </tr>
+            
+                <tr>
+                    <td>未分配利润</td>
+                    <td style="text-align: right;">0.00</td>
+                </tr>
+            
+                <tr>
+                    <td>待发分红</td>
+                    <td style="text-align: right;">0.00</td>
+                </tr>
+            
+            </tbody>
+        </table></div>
+                <div style="clear: both"></div>
+            </div><table class="table-loglines">
+            <thead>
+                <tr>
+                    <th class="th-date">Date</th>
+                    <th class="th-subj1">Subject 1</th>
+                    <th class="th-amount1">Amount 1</th>
+                    <th class="th-subj2">Subject 2</th>
+                    <th class="th-amount2">Amount 2</th>
+                    <th class="th-comment">Comment</th>
+                </tr>
+            </thead>
+        <tbody><tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">@本期营业/收入/主营业务</td>
+                    <td class="col-amount1">5800.00</td>
+                    <td class="col-subj2">@结算用临时科目/本期毛利</td>
+                    <td class="col-amount2">(5800.00)</td>
+                    <td class="col-comment">结算...</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">@本期营业/支出/成本</td>
+                    <td class="col-amount1">(5030.00)</td>
+                    <td class="col-subj2">@结算用临时科目/本期毛利</td>
+                    <td class="col-amount2">5030.00</td>
+                    <td class="col-comment">结算...</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">@本期营业/支出/管理费用</td>
+                    <td class="col-amount1">(225.00)</td>
+                    <td class="col-subj2">@结算用临时科目/本期毛利</td>
+                    <td class="col-amount2">225.00</td>
+                    <td class="col-comment">结算...</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">@结算用临时科目/本期毛利</td>
+                    <td class="col-amount1">27.25</td>
+                    <td class="col-subj2">@结算用临时科目/本期所得税</td>
+                    <td class="col-amount2">(27.25)</td>
+                    <td class="col-comment">结算...</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">(27.25)</td>
+                    <td class="col-subj2">@结算用临时科目/本期所得税</td>
+                    <td class="col-amount2">(27.25)</td>
+                    <td class="col-comment">缩表：缴纳企业所得税</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">@结算用临时科目/本期毛利</td>
+                    <td class="col-amount1">517.75</td>
+                    <td class="col-subj2">@结算用临时科目/本期净利</td>
+                    <td class="col-amount2">(517.75)</td>
+                    <td class="col-comment">结算...</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">@结算用临时科目/本期净利</td>
+                    <td class="col-amount1">517.75</td>
+                    <td class="col-subj2">未分配利润</td>
+                    <td class="col-amount2">(517.75)</td>
+                    <td class="col-comment">结算...</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">未分配利润</td>
+                    <td class="col-amount1">217.75</td>
+                    <td class="col-subj2">待发分红</td>
+                    <td class="col-amount2">(217.75)</td>
+                    <td class="col-comment">分红决议</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">未分配利润</td>
+                    <td class="col-amount1">300.00</td>
+                    <td class="col-subj2">资本公积</td>
+                    <td class="col-amount2">(300.00)</td>
+                    <td class="col-comment">资本公积</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">(117.25)</td>
+                    <td class="col-subj2">待发分红</td>
+                    <td class="col-amount2">(117.25)</td>
+                    <td class="col-comment">缩表：实发分红（张三）</td>
+            </tr>
+<tr>
+                    <td class="col-date">2015-12-31</td>
+                    <td class="col-subj1">银行存款/招商01</td>
+                    <td class="col-amount1">(100.00)</td>
+                    <td class="col-subj2">待发分红</td>
+                    <td class="col-amount2">(100.00)</td>
+                    <td class="col-comment">缩表：实发分红（李四）</td>
+            </tr></tbody></table><pre style="padding: 1em; background: rgba(122, 122, 122, 0.06); border: 1px solid #666;">
+
+#block(breakable: true, {
+set text(size: 9.0pt, number-width: "tabular")
+let render_transaction(dat, subj1, am1, subj2, am2, comment) = box(inset: (bottom: -0.3mm),table(
+    inset: 0mm,
+    columns:(6em, 3fr, 2fr, 3fr, 2fr, 4fr), gutter: 2mm, align: (left, left, right, left, right, left), stroke: none,
+    dat, subj1, am1, subj2, am2, text(size:0.75em, comment),
+))
+  render_transaction("2015-12-31", "@本期营业/收入/主营业务", "5800.00", "@结算用临时科目/本期毛利", "(5800.00)", "结算...")
+  render_transaction("2015-12-31", "@本期营业/支出/成本", "(5030.00)", "@结算用临时科目/本期毛利", "5030.00", "结算...")
+  render_transaction("2015-12-31", "@本期营业/支出/管理费用", "(225.00)", "@结算用临时科目/本期毛利", "225.00", "结算...")
+  render_transaction("2015-12-31", "@结算用临时科目/本期毛利", "27.25", "@结算用临时科目/本期所得税", "(27.25)", "结算...")
+  render_transaction("2015-12-31", "银行存款/招商01", "(27.25)", "@结算用临时科目/本期所得税", "(27.25)", "缩表：缴纳企业所得税")
+  render_transaction("2015-12-31", "@结算用临时科目/本期毛利", "517.75", "@结算用临时科目/本期净利", "(517.75)", "结算...")
+  render_transaction("2015-12-31", "@结算用临时科目/本期净利", "517.75", "未分配利润", "(517.75)", "结算...")
+  render_transaction("2015-12-31", "未分配利润", "217.75", "待发分红", "(217.75)", "分红决议")
+  render_transaction("2015-12-31", "未分配利润", "300.00", "资本公积", "(300.00)", "资本公积")
+  render_transaction("2015-12-31", "银行存款/招商01", "(117.25)", "待发分红", "(117.25)", "缩表：实发分红（张三）")
+  render_transaction("2015-12-31", "银行存款/招商01", "(100.00)", "待发分红", "(100.00)", "缩表：实发分红（李四）")
+})
+</pre><h2>资产负债表快照</h2><div>
+                <div style="float: left; margin-right: 2em;">
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th style="text-align: right;">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td><span ></span>银行存款</td>
+                <td style="text-align: right;">200300.50</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;招商01</td>
+                <td style="text-align: right;">200300.50</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>现金</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收银柜台</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;董事备用金</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>应收账款</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+                
+                <tr>
+                    <td>库存</td>
+                    <td style="text-align: right;">0.00</td>
+                </tr>
+            
+            </tbody>
+        </table></div>
+                <div style="float: left;">
+        <table style="border-collapse: collapse; width: 100%;">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th style="text-align: right;">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td><span ></span>实收资本</td>
+                <td style="text-align: right;">200000.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;缴纳总量</td>
+                <td style="text-align: right;">200000.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;张三</td>
+                <td style="text-align: right;">150000.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;李四</td>
+                <td style="text-align: right;">50000.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;消耗总量</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>应付账款</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;房东A</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供应商B</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>@本期营业</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;收入</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主营业务</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支出</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成本</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理费用</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+        
+            <tr>
+                <td><span ></span>@结算用临时科目</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本期毛利</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本期所得税</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+            <tr>
+                <td><span ></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本期净利</td>
+                <td style="text-align: right;">0.00</td>
+            </tr>
+            
+        
+        
+                
+                <tr>
+                    <td>资本公积</td>
+                    <td style="text-align: right;">300.00</td>
+                </tr>
+            
+                <tr>
+                    <td>未分配利润</td>
+                    <td style="text-align: right;">0.00</td>
+                </tr>
+            
+                <tr>
+                    <td>待发分红</td>
+                    <td style="text-align: right;">0.50</td>
+                </tr>
+            
+            </tbody>
+        </table></div>
+                <div style="clear: both"></div>
+            </div>
+</body>
+</html>

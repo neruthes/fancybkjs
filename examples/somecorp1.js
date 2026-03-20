@@ -22,8 +22,9 @@ let final_html = `<html>
 <head>
     <title>Example: SomeCorp1</title>
     <style>
+        <style>
         html, body {
-            font-size: 14px;
+            font-size: 10px;
         }
         h1 { padding: 60px 0 30px; }
         h2 { border-bottom: 1px solid #999; padding: 10px 0 10px; margin: 40px 0 20px; }
@@ -32,15 +33,17 @@ let final_html = `<html>
         }
         table.table-loglines { width: 100%; overflow: scroll; }
         th, td { padding: 3px 11px; }
-        th.th-subj1, th.th-subj2 { width: 10.5rem; }
-        th.th-amount1, th.th-amount2 { width: auto; text-align: right; }
+        th.th-date { width: 7em; }
+        th.th-subj1, th.th-subj2 { width: 20rem; }
+        th.th-amount1, th.th-amount2 { width: 6em; text-align: right; }
         table, tr {
             border: 1px solid #999;
             border-collapse: collapse;
         }
         .tabular-nums, td { font-variant-numeric: tabular-nums; }
-        td.col-comment { font-size: 0.8em; }
+        td.col-comment { font-size: 0.8em; width: auto; }
         td.col-amount1, td.col-amount2 { text-align: right; }
+    </style>
     </style>
 </head>
 <body>
