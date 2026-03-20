@@ -71,7 +71,7 @@ active_pro_group_obj = mybook.pro_group(function () {
     mybook.shrink(null, "银行存款/招商01", "@本期营业/支出/管理费用", 225, "缩表：支付清洁费");
 });
 book_output_stream += active_pro_group_obj.html;
-book_output_stream += active_pro_group_obj.typst_pre;
+// book_output_stream += active_pro_group_obj.typst_pre;
 accumulated_typst_code += active_pro_group_obj.typst;
 
 
@@ -97,7 +97,7 @@ active_pro_group_obj = mybook.pro_group(function () {
     mybook.shrink(null, "银行存款/招商01", "待发分红", 100.00, "缩表：实发分红（李四）")
 });
 book_output_stream += active_pro_group_obj.html;
-book_output_stream += active_pro_group_obj.typst_pre;
+// book_output_stream += active_pro_group_obj.typst_pre;
 accumulated_typst_code += active_pro_group_obj.typst;
 
 

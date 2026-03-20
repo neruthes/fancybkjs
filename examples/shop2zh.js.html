@@ -109,26 +109,7 @@
                     <td class="col-subj2">@本期营业/支出/管理费用</td>
                     <td class="col-amount2">(225.00)</td>
                     <td class="col-comment">缩表：支付清洁费</td>
-            </tr></tbody></table><pre style="padding: 1em; background: rgba(122, 122, 122, 0.06); border: 1px solid #666;">
-
-#block(breakable: true, {
-set text(size: 9.0pt, number-width: "tabular")
-let render_transaction(dat, subj1, am1, subj2, am2, comment) = box(inset: (bottom: -0.3mm),table(
-    inset: 0mm,
-    columns:(6em, 3fr, 2fr, 3fr, 2fr, 4fr), gutter: 2mm, align: (left, left, right, left, right, left), stroke: none,
-    dat, subj1, am1, subj2, am2, text(size:0.75em, comment),
-))
-  render_transaction("2015-02-18", "银行存款/招商01", "150000.00", "实收资本/缴纳总量/张三", "150000.00", "扩表：股东出资")
-  render_transaction("2015-02-18", "银行存款/招商01", "50000.00", "实收资本/缴纳总量/李四", "50000.00", "扩表：股东出资")
-  render_transaction("2015-02-18", "@本期营业/支出/成本", "4200.00", "应付账款/房东A", "(4200.00)", "产生店铺租金，2015-03")
-  render_transaction("2015-02-18", "库存", "830.00", "应付账款/供应商B", "830.00", "扩表：赊账进货")
-  render_transaction("2015-02-18", "银行存款/招商01", "5800.00", "@本期营业/收入/主营业务", "5800.00", "扩表：销售商品所得")
-  render_transaction("2015-02-18", "库存", "(830.00)", "@本期营业/支出/成本", "(830.00)", "缩表：结转销售成本")
-  render_transaction("2015-02-18", "银行存款/招商01", "(830.00)", "应付账款/供应商B", "(830.00)", "缩表：支付货款")
-  render_transaction("2015-03-09", "银行存款/招商01", "(4200.00)", "应付账款/房东A", "(4200.00)", "缩表：实际支付租金")
-  render_transaction("2015-03-09", "银行存款/招商01", "(225.00)", "@本期营业/支出/管理费用", "(225.00)", "缩表：支付清洁费")
-})
-</pre><h2>资产负债表快照</h2><div>
+            </tr></tbody></table><h2>资产负债表快照</h2><div>
                 <div style="float: left; margin-right: 2em;">
         <table style="border-collapse: collapse; width: 100%;">
             <thead>
@@ -442,28 +423,7 @@ let render_transaction(dat, subj1, am1, subj2, am2, comment) = box(inset: (botto
                     <td class="col-subj2">待发分红</td>
                     <td class="col-amount2">(100.00)</td>
                     <td class="col-comment">缩表：实发分红（李四）</td>
-            </tr></tbody></table><pre style="padding: 1em; background: rgba(122, 122, 122, 0.06); border: 1px solid #666;">
-
-#block(breakable: true, {
-set text(size: 9.0pt, number-width: "tabular")
-let render_transaction(dat, subj1, am1, subj2, am2, comment) = box(inset: (bottom: -0.3mm),table(
-    inset: 0mm,
-    columns:(6em, 3fr, 2fr, 3fr, 2fr, 4fr), gutter: 2mm, align: (left, left, right, left, right, left), stroke: none,
-    dat, subj1, am1, subj2, am2, text(size:0.75em, comment),
-))
-  render_transaction("2015-12-31", "@本期营业/收入/主营业务", "5800.00", "@结算用临时科目/本期毛利", "(5800.00)", "结算...")
-  render_transaction("2015-12-31", "@本期营业/支出/成本", "(5030.00)", "@结算用临时科目/本期毛利", "5030.00", "结算...")
-  render_transaction("2015-12-31", "@本期营业/支出/管理费用", "(225.00)", "@结算用临时科目/本期毛利", "225.00", "结算...")
-  render_transaction("2015-12-31", "@结算用临时科目/本期毛利", "27.25", "@结算用临时科目/本期所得税", "(27.25)", "结算...")
-  render_transaction("2015-12-31", "银行存款/招商01", "(27.25)", "@结算用临时科目/本期所得税", "(27.25)", "缩表：缴纳企业所得税")
-  render_transaction("2015-12-31", "@结算用临时科目/本期毛利", "517.75", "@结算用临时科目/本期净利", "(517.75)", "结算...")
-  render_transaction("2015-12-31", "@结算用临时科目/本期净利", "517.75", "未分配利润", "(517.75)", "结算...")
-  render_transaction("2015-12-31", "未分配利润", "217.75", "待发分红", "(217.75)", "分红决议")
-  render_transaction("2015-12-31", "未分配利润", "300.00", "资本公积", "(300.00)", "资本公积")
-  render_transaction("2015-12-31", "银行存款/招商01", "(117.25)", "待发分红", "(117.25)", "缩表：实发分红（张三）")
-  render_transaction("2015-12-31", "银行存款/招商01", "(100.00)", "待发分红", "(100.00)", "缩表：实发分红（李四）")
-})
-</pre><h2>资产负债表快照</h2><div>
+            </tr></tbody></table><h2>资产负债表快照</h2><div>
                 <div style="float: left; margin-right: 2em;">
         <table style="border-collapse: collapse; width: 100%;">
             <thead>
