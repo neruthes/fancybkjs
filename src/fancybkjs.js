@@ -88,11 +88,16 @@ class FancyBook {
     };
 
     __render_number(input_number) {
+        let result = '';
         if (input_number < 0) {
-            return this.__render_number__negative(input_number / 1000);
+            result = this.__render_number__negative(input_number / 1000);
         } else {
-            return (input_number / 1000).toFixed(2);
+            result = (input_number / 1000).toFixed(2);
         };
+        for (let itr = 0; itr < 7; itr ++) {
+            result = result.replace(/(\d)(\d{3})([\.\,])/, '$1,$2$3');
+        };
+        return result;
     };
 
     __render_group_arr_typst(arr) {
