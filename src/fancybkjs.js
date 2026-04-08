@@ -74,29 +74,27 @@ class FancyBook {
         };
     };
 
-    __render_number__negative(input_number) {
+    __render_number_negative_step2(input_str) {
         if (this._config.negative_style === "-") {
-            return (input_number).toFixed(2);
+            return input_str
         };
         if (this._config.negative_style === "()") {
-            return (input_number).toFixed(2).replace("-", "(") + ")";
+            return `(${input_str.replace('-', '')})`;
         };
         if (this._config.negative_style === "red") {
-            return `<span style="color: red;">${(input_number).toFixed(2)}</span>`;
+            return `<span style="color: red;">${input_str.replace('-', '-')}</span>`;
         };
         return 'CONFIG ERROR';
     };
 
     __render_number(input_number) {
-        let result = '';
+        let result = (input_number / 1000).toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).replace('$', '');
         if (input_number < 0) {
-            result = this.__render_number__negative(input_number / 1000);
-        } else {
-            result = (input_number / 1000).toFixed(2);
-        };
-        for (let itr = 0; itr < 7; itr ++) {
-            result = result.replace(/(\d)(\d{3})([\.\,])/, '$1,$2$3');
-        };
+            result = this.__render_number_negative_step2(result);
+        }
         return result;
     };
 
