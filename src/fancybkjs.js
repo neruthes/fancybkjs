@@ -87,7 +87,7 @@ class FancyBook {
 
     __render_number_negative_step2(input_str) {
         if (this._config.negative_style === "-") {
-            return input_str
+            return input_str;
         };
         if (this._config.negative_style === "()") {
             return `(${input_str.replace('-', '')})`;
@@ -99,6 +99,9 @@ class FancyBook {
     };
 
     __render_number(input_number) {
+        if (Object.is(input_number, -0)) {
+            input_number = 0;
+        }
         let result = (input_number / 1000).toLocaleString('en-US', {
             style: 'currency',
             currency: 'USD',
@@ -106,6 +109,7 @@ class FancyBook {
         if (input_number < 0) {
             result = this.__render_number_negative_step2(result);
         }
+        console.log(input_number, result);
         return result;
     };
 
@@ -131,9 +135,9 @@ let render_transaction(dat, subj1, am1, subj2, am2, comment) = box(inset: (botto
                 <tr>
                     <th class="th-date">Date</th>
                     <th class="th-subj1">Subject 1</th>
-                    <th class="th-amount1">Amount 1</th>
+                    <th class="th-amount1">Amount 1 ${this._config.currency}</th>
                     <th class="th-subj2">Subject 2</th>
-                    <th class="th-amount2">Amount 2</th>
+                    <th class="th-amount2">Amount 2 ${this._config.currency}</th>
                     <th class="th-comment">Comment</th>
                 </tr>
             </thead>
@@ -326,7 +330,7 @@ ${renderTreeRows(subjects_tree)}${renderSimpleRows()}
             <thead>
                 <tr>
                     <th>Subject</th>
-                    <th style="text-align: right;">Value</th>
+                    <th style="text-align: right;">Value ${this._config.currency}</th>
                 </tr>
             </thead>
             <tbody>
