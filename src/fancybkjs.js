@@ -1,3 +1,14 @@
+/*
+
+  The 'fancybkjs' program
+
+  Copyright (c) 2026 Neruthes. Released with the GNU GPL 2.0 license.
+
+  https://github.com/neruthes/fancybkjs
+
+*/
+
+
 // 8f1b0038d6d55b9956cc84d7d4f5e8d0
 // refetchw=https://raw.githubusercontent.com/neruthes/fancybkjs/refs/heads/master/src/fancybkjs.js
 
