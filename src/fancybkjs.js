@@ -109,23 +109,27 @@ class FancyBook {
         if (input_number < 0) {
             result = this.__render_number_negative_step2(result);
         }
-        console.log(input_number, result);
         return result;
     };
 
     __render_group_arr_typst(arr) {
         let output_string = `
 #block(breakable: true, {
-set text(size: 9.0pt, number-width: "tabular")
-let render_transaction(dat, subj1, am1, subj2, am2, comment) = box(inset: (bottom: -0.3mm),table(
-    inset: 0mm,
-    columns:(6em, 3fr, 2fr, 3fr, 2fr, 4fr), gutter: 2mm, align: (left, left, right, left, right, left), stroke: none,
-    dat, subj1, am1, subj2, am2, text(size:0.75em, comment),
-))\n`;
+    set text(size: 9.0pt, number-width: "tabular")
+    let render_transaction(dat, subj1, am1, subj2, am2, comment) = (
+        dat, subj1, am1, subj2, am2, text(size:0.9em, comment),
+    )
+`;
+        output_string += `table(
+    columns:(auto, 2fr, 6em, 2fr, 6em, 4fr),
+    align: (left, left, right, left, right, left),
+    table.header([Date],[Subject 1],[#"${this._config.currency}"],[Subject 2], [#"${this._config.currency}"],[Comment]),
+`; // Begin table
         output_string += arr.map(node => {
-            return `  render_transaction("${node.date}", "${node.subj1}", "${this.__render_number(node.amount)}", "${node.subj2}", "${this.__render_number(node.amount2)}", "${node.comment}")`;
+            return `  ..render_transaction("${node.date}", "${node.subj1}", "${this.__render_number(node.amount)}", "${node.subj2}", "${this.__render_number(node.amount2)}", "${node.comment}"),`;
         }).join('\n');
-        output_string += `\n})`;
+        output_string += `\n)`; // End table
+        output_string += `\n})`; // End block
         return output_string;
     };
 
